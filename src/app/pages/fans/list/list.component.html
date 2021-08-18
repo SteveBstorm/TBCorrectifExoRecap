@@ -1,0 +1,10 @@
+<nb-card>
+    <nb-card-header>Liste de tous les fans</nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let fan of fans">
+                {{ fan.nom }}
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,5 @@
+<span *ngIf="control && control?.invalid  && (control?.touched || control?.dirty)" class="text-red">
+    <span *ngIf="control?.getError('required')">Ce champs est requis</span>
+    <span *ngIf="control?.getError('tooYoung')">Vous etes trop jeune</span>
+    <span *ngIf="control?.getError('minlength')">Le champs est trop court</span>
+</span>

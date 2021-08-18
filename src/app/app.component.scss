@@ -1,0 +1,16 @@
+:host {
+    nb-layout-header {
+        ::ng-deep {
+            nav {
+                display: flex;
+                justify-content: space-between;
+                nb-icon {
+                    cursor: pointer;
+                    &:hover{
+                        color: #3366ff;
+                    }
+                }
+            }
+        }
+    }
+}

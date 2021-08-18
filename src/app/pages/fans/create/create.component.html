@@ -1,0 +1,19 @@
+<nb-card>
+    <nb-card-header>Nouveau fan</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="fg" (ngSubmit)="submit()">
+            <div class="form-group">
+                <input type="text" formControlName="nom" nbInput placeholder="Nom">
+                <app-form-error [control]="fg.get('nom')"></app-form-error>
+            </div>
+            <div class="form-group">
+                <input [nbDatepicker]="dp" formControlName="dateDeNaissance" nbInput placeholder="Date de naissance">
+                <nb-datepicker #dp></nb-datepicker>
+                <app-form-error [control]="fg.get('dateDeNaissance')"></app-form-error>
+            </div>
+            <div class="form-group">
+                <button [disabled]="fg.invalid" nbButton status="success" filled="outline">Sauvegarder</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
