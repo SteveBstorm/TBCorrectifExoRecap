@@ -2,8 +2,10 @@
     <nb-card-header>Liste de tous les fans</nb-card-header>
     <nb-card-body>
         <nb-list>
-            <nb-list-item *ngFor="let fan of fans">
-                {{ fan.nom }}
+            <nb-list-item *ngFor="let fan of fans; let i = index">
+                <a [routerLink]="['../../fans/details/'+i]">{{ fan.nom }}</a> &nbsp; | &nbsp; 
+                <a [routerLink]="['../../fans/update/'+i]">Modifier</a> &nbsp;
+                <button nbButton size="tiny" status="danger" (click)="delete(i)">X</button>
             </nb-list-item>
         </nb-list>
     </nb-card-body>

@@ -1,0 +1,21 @@
+<nb-card status="info">
+    <nb-card-header>
+        Profil de {{fan.nom}}
+    </nb-card-header>
+    <nb-card-body>
+        <p><label>Date de Naissance : {{fan.dateDeNaissance}}</label></p>
+        <nb-card *ngIf="fan.series">
+            <nb-card-header>
+                Liste des séries
+            </nb-card-header>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item *ngFor="let s of fan.series; let i = index">
+                        Serie {{i+1}} - {{s}}
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+        
+    </nb-card-body>
+</nb-card>

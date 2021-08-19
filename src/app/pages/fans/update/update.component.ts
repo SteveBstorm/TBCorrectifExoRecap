@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { FanModel } from 'src/app/core/models/fan.model';
 import { FanService } from 'src/app/core/services/fan.service';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 
 @Component({
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class UpdateComponent implements OnInit {
 
   fg!: FormGroup;
+
+  fan! : FanModel
 
   constructor(
     private fb: FormBuilder,
     private fanService: FanService,
     private router: Router,
     private toastr: NbToastrService,
+    private _ar : ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+
+    this.fan = this._ar.snapshot.data.fan
+
     this.fg = this.fb.group({
-      nom: [null, [
+      nom: [this.fan.nom, [
         Validators.required,
         Validators.minLength(2)
       ]],
-      dateDeNaissance: [null, [
+      dateDeNaissance: [this.fan.dateDeNaissance, [
         Validators.required,
         CustomValidators.moreThan(13)
       ]],
@@ -35,13 +42,18 @@ export class CreateComponent implements OnInit {
 
       ])
     });
+    if(this.fan.series) {
+      for(let i = 0; i < this.fan.series.length; i++ ){
+        this.addSeries(this.fan.series[i])
+      }
+    }
 
     this.fg.get('nom')?.getError('required')
   }
 
   submit() {
     if(this.fg.valid) {
-      this.fanService.add(this.fg.value);
+      this.fanService.updateFan(this._ar.snapshot.params['id'], this.fg.value);
       this.router.navigateByUrl('/fans/list');
       this.toastr.success('le fan est bien enregistré');
     }
@@ -51,12 +63,13 @@ export class CreateComponent implements OnInit {
     return this.fg.get('series') as FormArray
   }
 
-  addSeries() {
-    this.getSeriesArray().push(new FormControl("", Validators.required))
+  addSeries(value : string = "") {
+    this.getSeriesArray().push(new FormControl(value, Validators.required))
   }
 
   removeSerie(index : number) {
     this.getSeriesArray().removeAt(index)
   }
+
 
 }

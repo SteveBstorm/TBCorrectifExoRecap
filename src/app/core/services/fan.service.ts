@@ -29,7 +29,7 @@ export class FanService {
     //this.fans[index] = { ... oldFan, ...newFan }
   }
 
-  getOneFan(index: number) {
+  getOneFan(index: number) : FanModel {
     return this.fans[index];
   }
 }

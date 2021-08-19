@@ -1,0 +1,13 @@
+<nb-card status="info">
+    <nb-card-header>
+        <h3>Confirmation de suppression</h3>
+    </nb-card-header>
+    <nb-card-body>
+        Voulez vous supprimer le fan portant l'id : {{id}} ?
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="success" (click)="close(true)">Oui</button> &nbsp;
+        <button nbButton status="danger" (click)="close(false)">Non</button> &nbsp;
+
+    </nb-card-footer>
+</nb-card>
